@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.cydonia.movieapp.dialogs.MovieSortFragment"
+    android:background="@color/colorPrimary">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:text="Sort Movies By"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:fontFamily="sans-serif" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movie_sort_group">
+
+        <RadioButton
+            android:text="Now Playing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/nowplaying_movies"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Top Rated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toprated_movies"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Popular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/popular_movies"
+            android:layout_weight="1" />
+
+        <RadioButton
+            android:text="Upcoming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/upcoming_movies"
+            android:layout_weight="1" />
+    </RadioGroup>
+
+</LinearLayout>
