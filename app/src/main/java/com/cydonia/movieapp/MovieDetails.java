@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ public class MovieDetails extends Activity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_movie_details);
         Bundle extras = getIntent().getExtras();
         ImageView imageView = (ImageView)findViewById(R.id.details_image);
@@ -31,6 +34,17 @@ public class MovieDetails extends Activity{
         ((TextView)findViewById(R.id.details_desc)).setText(selectedMovieItem.getOverview());
 
         getActionBar().setTitle("Movie Details");
+        postponeEnterTransition();
+
+        final View decor = getWindow().getDecorView();
+        decor.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+            @Override
+            public boolean onPreDraw() {
+                decor.getViewTreeObserver().removeOnPreDrawListener(this);
+                startPostponedEnterTransition();
+                return true;
+            }
+        });
     }
 
     @Override

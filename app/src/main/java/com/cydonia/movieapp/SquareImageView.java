@@ -29,14 +29,15 @@ public class SquareImageView extends ImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        if(getMeasuredWidth() > width){
+        /*if(getMeasuredWidth() > width){
             width = getMeasuredWidth();
         }
 
         if(getMeasuredHeight() > height){
             height = getMeasuredHeight();
-        }
-        Log.d("CYDONIA", "width = " + width + ", height = " + height);
-        setMeasuredDimension(350, 515);
+        }*/
+
+        setMeasuredDimension(360, 515);
+        //setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight());
     }
 }

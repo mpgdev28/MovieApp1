@@ -9,7 +9,7 @@
     <item
         android:title="Sort"
         android:id="@+id/menu_sort"
-        android:icon="@mipmap/sys_filter"
+        android:icon="@drawable/ic_filter_list_white_48dp"
         android:showAsAction="always" />
 
 </menu>

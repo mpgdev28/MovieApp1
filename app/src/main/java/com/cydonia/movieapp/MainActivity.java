@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.display.DisplayManager;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -28,7 +30,7 @@ import java.util.List;
 
 public class MainActivity extends Activity implements MovieSortFragment.MovieSortListener {
 
-    private static final String TAG = "CYDONIA";
+    public static final String TAG = "CYDONIA";
     private GridView gridView;
     private ImageAdapter movieImageAdapter;
     private FetchMovieDataTask.MovieDataReceiver movieDataReceiver;
@@ -68,7 +70,15 @@ public class MainActivity extends Activity implements MovieSortFragment.MovieSor
         Point point = new Point();
         dm.getDisplay(0).getSize(point);
 
-        Log.d("CYDONIA","Screen size = " + point.x + ", " + point.y);
+        Log.d(TAG,"Screen size = " + point.x + ", " + point.y);
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            Log.d(TAG,"Portrait Orientation");
+        }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d(TAG,"Landscape Orientation");
+        }else{
+            Log.d(TAG,"Unknown Orientation");
+        }
 
         setContentView(R.layout.activity_main);
         movieDataReceiver = new MovieReceiver();
@@ -85,10 +95,15 @@ public class MainActivity extends Activity implements MovieSortFragment.MovieSor
                 detailsIntent.putExtra(MovieDetails.INTENT_EXTRA_IMAGE, ((BitmapDrawable) img.getDrawable()).getBitmap());
                 //use a parcelable is probably better
                 detailsIntent.putExtra(MovieDetails.INTENT_EXTRA_DETAILS, (Serializable)adapter.getItem(position));
+                View decor = getWindow().getDecorView();
+                View statusBar = decor.findViewById(android.R.id.statusBarBackground);
+                View navBar = decor.findViewById(android.R.id.navigationBarBackground);
 
+                String transitionName = getString(R.string.transition_movie_image);
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,
-                        new Pair<View, String>(img, getString(R.string.transition_movie_image)));
-
+                        new Pair<View, String>(img, transitionName),
+                        new Pair<View, String>(statusBar, Window.STATUS_BAR_BACKGROUND_TRANSITION_NAME),
+                        new Pair<View, String>(navBar, Window.NAVIGATION_BAR_BACKGROUND_TRANSITION_NAME));
                 startActivity(detailsIntent, options.toBundle());
             }
         });

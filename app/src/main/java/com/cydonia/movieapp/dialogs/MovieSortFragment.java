@@ -29,7 +29,7 @@ public class MovieSortFragment extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.MyAlertDialogStyle);
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_movie_sort, null);
         optionsGroup = (RadioGroup)view.findViewById(R.id.movie_sort_group);
@@ -60,8 +60,6 @@ public class MovieSortFragment extends DialogFragment {
 
         return builder.create();
     }
-
-
 
     private void addListeners() {
         optionsGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

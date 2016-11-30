@@ -1,5 +1,7 @@
 package com.cydonia.movieapp.data;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 import java.util.Arrays;
 
@@ -22,6 +24,15 @@ public class MovieListing implements Serializable {
     private int voteCount;
     private boolean video;
     private float voteAverage;
+    private Bitmap moviePoster;
+
+    public Bitmap getMoviePoster() {
+        return moviePoster;
+    }
+
+    public void setMoviePoster(Bitmap moviePoster) {
+        this.moviePoster = moviePoster;
+    }
 
     public boolean isAdult() {
         return adult;
