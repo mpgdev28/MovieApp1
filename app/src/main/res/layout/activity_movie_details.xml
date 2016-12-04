@@ -96,7 +96,7 @@
                     android:textSize="16sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/details_isfavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignStart="@+id/details_movie_rating"

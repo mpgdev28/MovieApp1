@@ -55,6 +55,10 @@ public class MainActivity extends Activity implements MovieSortFragment.MovieSor
                 fragment.setCancelable(false);
                 fragment.show(getFragmentManager(), TAG);
                 break;
+            case R.id.menu_fave:
+                Intent favIntent = new Intent(getApplicationContext(), FavoritesActivity.class);
+                startActivity(favIntent);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -66,18 +70,18 @@ public class MainActivity extends Activity implements MovieSortFragment.MovieSor
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        DisplayManager dm = (DisplayManager)getSystemService(DISPLAY_SERVICE);
+        DisplayManager dm = (DisplayManager) getSystemService(DISPLAY_SERVICE);
         Point point = new Point();
         dm.getDisplay(0).getSize(point);
 
-        Log.d(TAG,"Screen size = " + point.x + ", " + point.y);
+        Log.d(TAG, "Screen size = " + point.x + ", " + point.y);
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            Log.d(TAG,"Portrait Orientation");
-        }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            Log.d(TAG,"Landscape Orientation");
-        }else{
-            Log.d(TAG,"Unknown Orientation");
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Log.d(TAG, "Portrait Orientation");
+        } else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d(TAG, "Landscape Orientation");
+        } else {
+            Log.d(TAG, "Unknown Orientation");
         }
 
         setContentView(R.layout.activity_main);
@@ -88,13 +92,13 @@ public class MainActivity extends Activity implements MovieSortFragment.MovieSor
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ImageAdapter adapter = (ImageAdapter)parent.getAdapter();
+                ImageAdapter adapter = (ImageAdapter) parent.getAdapter();
                 Intent detailsIntent = new Intent(getApplicationContext(), MovieDetails.class);
                 ImageView img = (ImageView) view.findViewById(R.id.movie_image);
                 //don't do this - remove
                 detailsIntent.putExtra(MovieDetails.INTENT_EXTRA_IMAGE, ((BitmapDrawable) img.getDrawable()).getBitmap());
                 //use a parcelable is probably better
-                detailsIntent.putExtra(MovieDetails.INTENT_EXTRA_DETAILS, (Serializable)adapter.getItem(position));
+                detailsIntent.putExtra(MovieDetails.INTENT_EXTRA_DETAILS, (Serializable) adapter.getItem(position));
                 View decor = getWindow().getDecorView();
                 View statusBar = decor.findViewById(android.R.id.statusBarBackground);
                 View navBar = decor.findViewById(android.R.id.navigationBarBackground);
